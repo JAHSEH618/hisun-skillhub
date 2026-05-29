@@ -97,9 +97,23 @@ class RouteSecurityPolicyRegistryTest {
 
     @Test
     void shouldIgnoreCsrf_forBearerAndApiPaths() {
-        assertTrue(registry.shouldIgnoreCsrf("/api/v1/admin/users", null));
-        assertTrue(registry.shouldIgnoreCsrf("/not-api", "Bearer token"));
-        assertFalse(registry.shouldIgnoreCsrf("/ui/settings", null));
+        var request1 = new org.springframework.mock.web.MockHttpServletRequest();
+        request1.setRequestURI("/api/v1/admin/users");
+        assertTrue(registry.shouldIgnoreCsrf(request1));
+
+        var request2 = new org.springframework.mock.web.MockHttpServletRequest();
+        request2.setRequestURI("/not-api");
+        request2.addHeader("Authorization", "Bearer token");
+        assertTrue(registry.shouldIgnoreCsrf(request2));
+
+        var request3 = new org.springframework.mock.web.MockHttpServletRequest();
+        request3.setRequestURI("/ui/settings");
+        assertFalse(registry.shouldIgnoreCsrf(request3));
+
+        var request4 = new org.springframework.mock.web.MockHttpServletRequest();
+        request4.setRequestURI("/api/v1/admin/users");
+        request4.setCookies(new jakarta.servlet.http.Cookie("SESSION", "123456"));
+        assertFalse(registry.shouldIgnoreCsrf(request4));
     }
 
     @Test

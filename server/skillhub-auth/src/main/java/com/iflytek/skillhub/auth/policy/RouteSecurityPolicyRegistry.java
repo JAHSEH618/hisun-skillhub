@@ -7,6 +7,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * Authoritative route-policy catalog shared by web security configuration,
@@ -150,12 +151,21 @@ public class RouteSecurityPolicyRegistry {
         return ApiTokenAuthorizationDecision.unsupported(path);
     }
 
-    public boolean shouldIgnoreCsrf(String path, String authorizationHeader) {
+    public boolean shouldIgnoreCsrf(HttpServletRequest request) {
+        String authorizationHeader = request.getHeader("Authorization");
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             return true;
         }
+        String path = request.getRequestURI();
         if (path == null) {
             return false;
+        }
+        if (request.getCookies() != null) {
+            for (var cookie : request.getCookies()) {
+                if ("SESSION".equals(cookie.getName())) {
+                    return false;
+                }
+            }
         }
         return path.startsWith("/api/");
     }

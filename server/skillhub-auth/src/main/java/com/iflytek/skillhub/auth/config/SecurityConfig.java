@@ -100,11 +100,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         var csrfHandler = new CsrfTokenRequestAttributeHandler();
         csrfHandler.setCsrfRequestAttributeName(null);
-        RequestMatcher csrfIgnoreMatcher = request -> {
-            String path = request.getRequestURI();
-            String authorization = request.getHeader("Authorization");
-            return routeSecurityPolicyRegistry.shouldIgnoreCsrf(path, authorization);
-        };
+        RequestMatcher csrfIgnoreMatcher = routeSecurityPolicyRegistry::shouldIgnoreCsrf;
 
         http
             .csrf(csrf -> csrf
