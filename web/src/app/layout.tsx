@@ -72,8 +72,11 @@ export function Layout() {
 
       {/* Header */}
       <header className={getAppHeaderClassName(isHeaderElevated)} style={{ borderColor: 'hsl(var(--border))' }}>
-        <Link to="/" className="text-xl font-semibold tracking-tight text-brand-gradient">
-          Hisun SkillHub
+        <Link to="/" className="flex items-center gap-3">
+          <img src="/logo.svg" alt="Hisun Logo" className="h-8 w-auto object-contain" />
+          <span className="text-xl font-bold tracking-tight text-brand-gradient hidden sm:inline-block">
+            Hisun SkillHub
+          </span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-8 text-[15px] font-normal" style={{ color: 'hsl(var(--text-secondary))' }}>
@@ -136,10 +139,8 @@ export function Layout() {
         <div className="max-w-6xl mx-auto px-6 md:px-12 py-10">
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10 md:gap-12">
             <div className="flex-shrink-0">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-9 h-9 rounded-lg flex items-center justify-center text-white text-sm font-bold shadow-sm bg-brand-gradient">
-                  S
-                </div>
+              <div className="flex items-center gap-3 mb-3">
+                <img src="/logo.svg" alt="Hisun Logo" className="h-9 w-auto object-contain" />
                 <span className="text-lg font-bold text-brand-gradient">Hisun SkillHub</span>
               </div>
               <p className="text-sm max-w-xs" style={{ color: 'hsl(var(--text-secondary))' }}>
