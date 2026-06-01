@@ -108,7 +108,7 @@
       },
       "cli": {
         "description": "安装 SkillHub CLI 到本地，后续可运行 skillhub install 安装技能",
-        "command": "npm i -g @astron-team/skillhub"
+        "command": "npm i -g @hisun/skillhub"
       },
       "agent": {
         "description": "发送提示词给你的 Agent，以设置SkillHub Registry",

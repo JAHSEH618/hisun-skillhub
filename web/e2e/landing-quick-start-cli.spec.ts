@@ -27,7 +27,7 @@ test.describe('Landing Quick Start CLI Tab (Real API)', () => {
     await expect(
       page.getByText('Install the SkillHub CLI locally to run skillhub install for skills.'),
     ).toBeVisible()
-    await expect(page.getByText('npm i -g @astron-team/skillhub', { exact: true })).toBeVisible()
+    await expect(page.getByText('npm i -g @hisun/skillhub', { exact: true })).toBeVisible()
   })
 
   test('agent and human tabs keep their original commands', async ({ page }) => {

@@ -108,7 +108,7 @@
       },
       "cli": {
         "description": "Install the SkillHub CLI locally to run skillhub install for skills.",
-        "command": "npm i -g @astron-team/skillhub"
+        "command": "npm i -g @hisun/skillhub"
       },
       "agent": {
         "description": "Send a prompt to your Agent to set up the SkillHub Registry",
